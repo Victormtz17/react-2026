@@ -14,10 +14,10 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from 'react-router-dom';
 
-const pages = ['Login', 'Profile'];
+const pages = ['Login', 'Profile', 'Admin'];
 const settings = ['Logout'];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar({logout}) {
     const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -30,18 +30,27 @@ function ResponsiveAppBar() {
   };
 
   const handleCloseNavMenu = (e) => {
-    console.log(e.target.innerText)
-    if(e.currentTarget.innerText === pages [0]) {
+    console.log(e.target.textContent)
+    if(e.currentTarget.textContent === pages [0]) {
         navigate('/')
-    }else if(e.currentTarget.innerText === pages [1]) {
+    }else if(e.currentTarget.textContent === pages [1]) {
         navigate('/profile')
 
+    }else if(e.currentTarget.textContent === pages [2]) {
+        navigate('/Admin')
     }
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (e) => {
     setAnchorElUser(null);
+    console.log(e.currentTarget.textContent)
+    if(e.currentTarget.textContent === settings [0]) {
+      logout()
+      navigate('/')
+    }
+    setAnchorElUser(null);
+
   };
 
   return (
